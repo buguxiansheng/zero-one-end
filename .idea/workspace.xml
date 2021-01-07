@@ -14,9 +14,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="AnnotationType" />
         <option value="Interface" />
         <option value="Mapper" />
+        <option value="AnnotationType" />
         <option value="Class" />
       </list>
     </option>
