@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.annotation.WebFilter;
 
-@WebFilter(filterName = "CorsFilter ")
+@WebFilter(filterName = "CorsFilter")
 @Configuration
 public class CorsConfig implements WebMvcConfigurer {
     @Override

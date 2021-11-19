@@ -5,10 +5,9 @@ spring:
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://119.45.140.92:3306/zero-one?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+      url: jdbc:mysql://47.98.45.74:3306/zero-one-end?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
       username: root
-      password: wei25257758
-
+      password: Life1234567
 
   redis:
     database: 0
@@ -16,15 +15,38 @@ spring:
     port: 6379
     password:
     timeout: 6000ms
+#连接server端
+  rabbitmq:
+    host: 47.98.45.74
+    port: 5672
+    username: admin
+    password: StrongPassword
+    #虚拟host 可以不设置,使用server默认host
+    virtual-host: /
 
 
-mybatis:
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.lcfc.demo.modules.sys.entity
+config:
+  jwt:
+    # 加密密钥
+    secret: abcdefg1234567
+    # token有效时长
+    expire: 3600
+    # header 名称
+    header: token
+
+
+#
+#mybatis:
+#  mapper-locations: classpath:mapper/*.xml
+#  type-aliases-package: com.lcfc.demo.modules.sys.entity
 
 #  日志
 logging:
   level:
     com.lcfc.demo.modules.sys.mapper: debug
+
+
+
+
 
 

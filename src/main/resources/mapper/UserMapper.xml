@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lcfc.demo.modules.sys.mapper.UserMapper">
+<mapper namespace="com.lcfc.demo.modules.sdv.mapper.UserMapper">
 <!--    数据库字段和类属性对应-->
 
 
-    <resultMap id="userMap" type="com.lcfc.demo.modules.sys.dto.UserLoginDto">
+    <resultMap id="userMap" type="com.lcfc.demo.modules.sdv.dto.UserLoginDto">
         <result property="userName" column="user_name"></result>
         <result property="passWord" column="pass_word"></result>
     </resultMap>
@@ -18,7 +18,7 @@
 
     </select>
 <!--        返回值-->
-    <select id="getUserList" resultType="com.lcfc.demo.modules.sys.dto.UserLoginDto" parameterType="java.lang.String">
+    <select id="getUserList" resultType="com.lcfc.demo.modules.sdv.dto.UserLoginDto" parameterType="java.lang.String">
         select
             a.user_name,
             a.pass_word

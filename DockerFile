@@ -1,0 +1,12 @@
+From java:8
+
+Maintainer will
+
+Copy ./target/.jar /root/xx.jar
+
+Entrypoint ["exec","-jar","xx.jar"]
+
+
+
+
+
