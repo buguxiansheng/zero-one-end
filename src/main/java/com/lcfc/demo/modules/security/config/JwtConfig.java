@@ -7,6 +7,7 @@ import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
@@ -19,12 +20,15 @@ import java.util.Date;
 public class JwtConfig {
 
     // 密钥
+    @Value("${config.jwt.secret:abcdefg1234567}")
     private String secret;
 
     // 过期时间
+    @Value("${config.jwt.expire}")
     private int expire;
 
     //
+    @Value("${config.jwt.header}")
     private String header;
 
 

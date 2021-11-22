@@ -37,10 +37,14 @@ public class CustomRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo az = new SimpleAuthorizationInfo();
         // 在哪封装的
         String username = (String) principalCollection.getPrimaryPrincipal();
+
         Map qMap = new HashMap<>();
         qMap.put("username",username);
         User userDetail = (User) userMapper.selectByMap(qMap).get(0);
-        // 添加角色
+
+        // 根据用户名获取roleName
+
+        // 添加角色 角色从那里来
         userDetail.getRoles().stream().forEach(a->az.addRole(a.getRoleName()));
         // 添加权限
         userDetail.getRoles().stream().forEach(a->{
@@ -69,8 +73,8 @@ public class CustomRealm extends AuthorizingRealm {
         qMap.put("username",username);
         User userDetail = (User) userMapper.selectByMap(qMap).get(0);
 
-        // ???
-        SimpleAuthenticationInfo ac = new SimpleAuthenticationInfo(username,userDetail.getUserName(),getName());
+        // 与数据库信息做比对
+        SimpleAuthenticationInfo ac = new SimpleAuthenticationInfo(username,userDetail.getPassWord(),getName());
         return ac;
     }
 }

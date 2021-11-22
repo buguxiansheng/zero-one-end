@@ -46,6 +46,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
 
+
         // filterChain
         Map<String,String> filterMap = new HashMap<>();
 
@@ -59,6 +60,10 @@ public class ShiroConfig {
 
         return shiroFilterFactoryBean;
     }
+
+
+
+
 
 
 
