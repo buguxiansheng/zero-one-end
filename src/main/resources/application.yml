@@ -8,13 +8,20 @@ spring:
       url: jdbc:mysql://47.98.45.74:3306/zero-one-end?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&allowMultiQueries=true
       username: root
       password: Life1234567
-
+# redis 地址
   redis:
     database: 0
-    host: 119.45.140.92
+    host: 47.98.45.74
     port: 6379
     password:
-    timeout: 6000ms
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 500
+        min-idle: 0
+      lettuce:
+        shutdown-timeout: 6000ms
 #连接server端
   rabbitmq:
     host: 47.98.45.74
@@ -43,7 +50,7 @@ config:
 #  日志
 logging:
   level:
-    com.lcfc.demo.modules.sys.mapper: debug
+    com.lcfc.demo.modules: debug
 
 
 

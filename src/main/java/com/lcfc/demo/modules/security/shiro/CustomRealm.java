@@ -12,6 +12,7 @@ import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Collection;
@@ -73,8 +74,10 @@ public class CustomRealm extends AuthorizingRealm {
         qMap.put("username",username);
         User userDetail = (User) userMapper.selectByMap(qMap).get(0);
 
+        // 对密码加密
+        ByteSource salt = ByteSource.Util.bytes(username);
         // 与数据库信息做比对
-        SimpleAuthenticationInfo ac = new SimpleAuthenticationInfo(username,userDetail.getPassWord(),getName());
+        SimpleAuthenticationInfo ac = new SimpleAuthenticationInfo(username,userDetail.getPassWord(),salt,getName());
         return ac;
     }
 }
