@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 @ConfigurationProperties(prefix = "config.jwt")
@@ -34,20 +36,27 @@ public class JwtConfig {
 
     /**
      * 根据用户生成token
-     * @param token
+     * @param user
      * @return  返回一个token
      */
-    public String createToken (UsernamePasswordToken token){
+    public String createToken (User user){
         //获取当前时间
         Date nowDate = new Date();
         // 设置
         Date expireDate = new Date(nowDate.getTime() + expire * 1000);//过期时间
+        // role 和 permission
+        Map<String,Object> rights = new HashMap<>();
+
+        // 存放当前用户角色和权限
+        rights.put("role",user.getRoles());
+        rights.put("permissions",user.getPermissions());
 
         return Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)  // ??
-                .setSubject(token.getUsername())  // 包含用户名
+                .setSubject(user.getUserName())  // 包含用户名
                 .setIssuedAt(nowDate)
                 .setExpiration(expireDate)
+                .setClaims(rights)
                 .signWith(SignatureAlgorithm.HS512, secret) // 签名算法
                 .compact();
     }

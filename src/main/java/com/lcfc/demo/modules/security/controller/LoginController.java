@@ -46,8 +46,6 @@ public class LoginController {
     // 用户登录
     @PostMapping("/login")
     public Result login(@RequestBody User user){
-        // 校验验证码 TODO
-
         // shiro 做校验的
         UsernamePasswordToken utToken = new UsernamePasswordToken(user.getUserName(),user.getPassWord());
         // 密码加密
@@ -55,14 +53,17 @@ public class LoginController {
         try {
             // shiro  对密码加密
             sbj.login(utToken);
+
+            //
         } catch (AuthenticationException e) {
             return new Result().error(110,"账号或密码错误");
         }
+
         // 1 根据username 生成token  放在内存中  // 2 可以存放到redis中
-        String token = jwtConfig.createToken(utToken);
+        String token = jwtConfig.createToken(user);
         // 存放到redis中
         try {
-            redisTemplate.boundValueOps(user.getUserName()).set(token,3, TimeUnit.MINUTES);
+            redisTemplate.boundValueOps(token).set(token,3, TimeUnit.MINUTES);
         } catch (Exception e) {
             log.error("服务器存储token失败:{}",e.getCause());
         }
@@ -70,16 +71,12 @@ public class LoginController {
         return new Result<>().ok(token);
     }
 
-
-
     // 清除token
     @PostMapping("/exit")
     public void exit(User user){
         // 清除token  放redis中 设置过期时间
         redisTemplate.delete(user.getUserName());
     }
-
-
 
     //   注册   引入短信验证码
     @PostMapping("/register")
@@ -103,4 +100,5 @@ public class LoginController {
         // 生成密码
         return new Result().ok("用户创建成功");
     }
+
 }

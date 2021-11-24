@@ -1,7 +1,8 @@
 package com.lcfc.demo.modules.security.entity;
 
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.enums.FieldFill;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+
 import lombok.Data;
 
 import java.io.Serializable;

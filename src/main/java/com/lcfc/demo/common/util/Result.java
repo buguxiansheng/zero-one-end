@@ -33,5 +33,4 @@ public class Result<T> implements Serializable {
     public Result error(int code,String msg) {
         return new Result(code, msg);
     }
-
 }
